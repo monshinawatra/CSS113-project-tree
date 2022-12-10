@@ -6,7 +6,7 @@ import numpy as np
 from tree.graph import UndirectedGraph
 
 structure = np.array([("A", "B", 2), ("A", "C", 5), ("A", "C", 4)])
-undirected_graph = UndirectedGraph.array(structure, weighted_graph=True)
+undirected_graph = UndirectedGraph.from_array(structure, weighted_graph=True)
 
 new_structure = np.array([("C", "D", 0.5)])
 undirected_graph.add_edge(new_structure)

@@ -6,7 +6,7 @@ from .edge import Edge
 from .vertex import Vertex
 
 
-class Tree:
+class Graph:
     def __init__(
         self,
         array: np.ndarray = np.empty((0,)),
@@ -77,12 +77,6 @@ class Tree:
         Get vertices by name
         """
         return [self.get_vertex(name) for name in list_name]
-
-    def get_vertex_edges(self, name: str):
-        """
-        Get all vertex edges by name
-        """
-        return self.get_vertex(name).get_edges()
 
     def get_smallest_edge(self):
         """

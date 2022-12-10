@@ -7,6 +7,9 @@ class Vertex:
         self.edges = edge
         self.degrees = len(edge)
         self.undirected = undirected
+        
+    def get_smallest_edge(self):
+        return min(self.edges, key=lambda edge: edge.weight)
 
     def add_edges(self, edges: list):
         self.edges = np.append(self.edges, edges)

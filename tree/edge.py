@@ -1,5 +1,5 @@
 class Edge:
-    def __init__(self, left, right, name: str = "", weight: int = 0, undirected: bool = False):
+    def __init__(self, left, right, name: str = "", weight: float = 0, undirected: bool = False):
         self.weight = weight
         self.left = left
         self.right = right

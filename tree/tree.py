@@ -32,7 +32,7 @@ class Graph:
         weights = array[:, 2]
 
         get_name = np.vectorize(lambda x: self.get_vertex(x))
-        create_edges = np.vectorize(lambda x, y, z: Edge(left=x, right=y, weight=z, undirected=self.undirected))
+        create_edges = np.vectorize(lambda x, y, z: Edge(left=x, right=y, weight=float(z), undirected=self.undirected))
         update_degrees = np.vectorize(lambda x: x.update_degrees())
 
         vertices = get_name(names_list)

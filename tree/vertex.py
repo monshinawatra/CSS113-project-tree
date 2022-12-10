@@ -2,9 +2,10 @@ import numpy as np
 
 
 class Vertex:
-    def __init__(self, name: str, edge: np.ndarray = np.array([]), undirected: bool = True):
+    def __init__(self, name: str, edge: np.ndarray = np.empty((0,)), undirected: bool = True):
         self.name = name
         self.edges = edge
+        self.degrees = len(edge)
         self.undirected = undirected
 
     def add_edges(self, edges: list):

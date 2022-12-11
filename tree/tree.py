@@ -13,8 +13,8 @@ class Tree:
         weighted_graph: bool = True,
         undirected: bool = True,
     ):
-        self.vertices = np.empty((0,))
-        self.edges = np.empty((0,))
+        self.vertices: np.ndarray = np.empty((0,))
+        self.edges: np.ndarray = np.empty((0,))
         self.undirected = undirected
         self.weighted_graph = weighted_graph
 

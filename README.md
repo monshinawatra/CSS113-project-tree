@@ -1,3 +1,4 @@
+```python
 import numpy as np
 
 from tree.graph import UndirectedGraph
@@ -24,3 +25,5 @@ print()
 print(undirected_graph.get_edge_to("E", "B")[0].weight)
 print("Smallest edge", undirected_graph.get_smallest_edge().weight)
 print("Adjacent", UndirectedGraph.vertices2name(undirected_graph.get_adjacent_vertices("A")))
+
+```

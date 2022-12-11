@@ -1,21 +1,26 @@
-# CSS113-project-tree
-
-```python
 import numpy as np
 
 from tree.graph import UndirectedGraph
 
-structure = np.array([("A", "B", 2), ("A", "C", 5), ("A", "C", 4)])
-undirected_graph = UndirectedGraph.from_numpy(structure, weighted_graph=True)
-
-new_structure = np.array([("C", "D", 0.5)])
-undirected_graph.add_edge(new_structure)
-
+graph_array = np.array(
+    [
+        ["A", "B", 4],
+        ["A", "C", 5],
+        ["B", "C", 11],
+        ["B", "D", 9],
+        ["B", "E", 7],
+        ["C", "E", 3],
+        ["D", "E", 13],
+        ["D", "F", 2],
+        ["E", "F", 6],
+    ]
+)
+undirected_graph = UndirectedGraph.from_numpy(graph_array, weighted_graph=True)
 for vertex in undirected_graph.vertices:
     print(vertex.name)
-    print(*[(edge.left.name, edge.right.name, edge.weight) for edge in vertex.get_edges()])
+    print(*[(edge.left.name, edge.right.name, edge.weight) for edge in vertex.edges])
 
 print()
+print(undirected_graph.get_edge_to("E", "B")[0].weight)
 print("Smallest edge", undirected_graph.get_smallest_edge().weight)
-print("Adjacent", undirected_graph.get_adjacent_vertices("D")[0].name)
-```
+print("Adjacent", UndirectedGraph.vertices2name(undirected_graph.get_adjacent_vertices("A")))

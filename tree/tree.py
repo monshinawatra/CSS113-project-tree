@@ -1,4 +1,4 @@
-from itertools import chain
+from typing import List
 
 import numpy as np
 
@@ -6,7 +6,7 @@ from .edge import Edge
 from .vertex import Vertex
 
 
-class Graph:
+class Tree:
     def __init__(
         self,
         array: np.ndarray = np.empty((0,)),
@@ -44,7 +44,7 @@ class Graph:
         self.edges = np.append(self.edges, edges)
         update_degrees(vertices)
 
-    def add_vertex(self, vertices_name: list) -> None:
+    def add_vertex(self, vertices_name: List[str]) -> None:
         """
         Add unique vertex to tree
         """
@@ -72,36 +72,14 @@ class Graph:
                 return vertex
         return None
 
-    def get_vertices(self, list_name: list):
+    def get_vertices(self, list_name: List[str]):
         """
         Get vertices by name
         """
         return [self.get_vertex(name) for name in list_name]
 
-    def get_smallest_edge(self):
-        """
-        Get the smallest edge in tree
-        """
-        return min(self.edges, key=lambda edge: edge.weight)
-
-    def get_adjacent_vertices(self, name: str):
-        """
-        Get adjacent vertices by name
-        """
-        vertex = self.get_vertex(name)
-        adjacent_vertices = [
-            (edge.left, edge.right) for edge in vertex.get_edges() if vertex.name in [edge.left.name, edge.right.name]
-        ]
-        adjacent_vertices = list(set(chain(*adjacent_vertices)))
-        adjacent_vertices = [vertex for vertex in adjacent_vertices if vertex.name != name]
-        return adjacent_vertices
-
     @classmethod
-    def from_numpy(cls, array: list, undirected: bool = True, weighted_graph: bool = True):
-        return cls(array=array, undirected=undirected, weighted_graph=weighted_graph)
-
-    @classmethod
-    def vertices2name(cls, vertices: list):
+    def vertices2name(cls, vertices: List[Vertex]):
         """
         Return list of vertices name
         """

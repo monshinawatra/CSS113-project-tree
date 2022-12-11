@@ -1,4 +1,8 @@
+from typing import List
+
 import numpy as np
+
+from .edge import Edge
 
 
 class Vertex:
@@ -7,11 +11,11 @@ class Vertex:
         self.edges = edge
         self.degrees = len(edge)
         self.undirected = undirected
-        
+
     def get_smallest_edge(self):
         return min(self.edges, key=lambda edge: edge.weight)
 
-    def add_edges(self, edges: list):
+    def add_edges(self, edges: List[Edge]):
         self.edges = np.append(self.edges, edges)
 
     def update_degrees(self):

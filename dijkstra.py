@@ -1,4 +1,3 @@
-import time
 from typing import Dict
 
 import numpy as np
@@ -6,17 +5,14 @@ import numpy as np
 from tree.graph import UndirectedGraph
 from tree.tree import Tree
 
-start = time.time()
 DEFAULT_VALUE = [float("inf"), None]
 DIJKSTRA_CONFIG = {
     "start": "A",
     "target": "F",
 }
 
-
 def get_weight(path_length: Dict[float, str], key: str) -> float:
     return path_length.get(key, DEFAULT_VALUE)[0]
-
 
 graph_array = np.array(
     [
@@ -33,12 +29,12 @@ graph_array = np.array(
 )
 graph = UndirectedGraph.from_numpy(array=graph_array, weighted_graph=True)
 unupdate_path = Tree.vertices2name(graph.vertices)
-path_length = {
-    DIJKSTRA_CONFIG["start"]: [0, DIJKSTRA_CONFIG["start"]],
-}
-
 start = DIJKSTRA_CONFIG["start"]
 target = DIJKSTRA_CONFIG["target"]
+
+path_length = {
+    start: [0, start],
+}
 
 while len(unupdate_path):
     current_vertex = min(unupdate_path, key=lambda x: get_weight(path_length, x))
@@ -51,7 +47,6 @@ while len(unupdate_path):
 
         new_path = get_weight(path_length, current_vertex) + float(edge.weight)
         old_path = get_weight(path_length, adj)
-
         if new_path > old_path:
             continue
         path_length[adj] = [new_path, current_vertex]
@@ -62,4 +57,4 @@ current_node = target
 while current_node != start:
     shortest_path.insert(1, current_node)
     current_node = path_length[current_node][1]
-print(shortest_path, smallest_weight:=path_length[target][0])
+print(shortest_path, smallest_weight := path_length[target][0])

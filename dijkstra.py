@@ -3,30 +3,10 @@ from typing import Dict, List
 import numpy as np
 
 from tree.graph import UndirectedGraph
+from tree.tree import Tree
 
 DEFAULT_VALUE = [float("inf"), None]
-
-
-def get_weight(path_length: dict, key: str) -> float:
-    return path_length.get(key, DEFAULT_VALUE)[0]
-
-
-graph_array = np.array(
-    [
-        ("A", "B", 4),
-        ("A", "C", 5),
-        ("B", "C", 11),
-        ("B", "D", 9),
-        ("B", "E", 7),
-        ("C", "E", 3),
-        ("D", "E", 13),
-        ("D", "F", 2),
-        ("E", "F", 6),
-    ]
-)
-graph = UndirectedGraph.from_numpy(array=graph_array, weighted_graph=True)
-
-dijkstra_config = {
+DIJKSTRA_CONFIG = {
     "start": "A",
     "target": "F",
 }
@@ -66,9 +46,9 @@ target = DIJKSTRA_CONFIG["target"]
 while len(unupdate_path):
     current_vertex = min(unupdate_path, key=lambda x: get_weight(path_length, x))
 
-    adjacenct_vertex = UndirectedGraph.vertices2name(graph.get_adjacent_vertices(current_vertex))
+    adjacenct_vertex = Tree.vertices2name(graph.get_adjacent_vertices(current_vertex))
     for adj in adjacenct_vertex:
-        if adj == dijkstra_config["start"]:
+        if adj == start:
             continue
         edge = min(graph.get_edge_to(current_vertex, adj), key=lambda x: x.weight)
 

@@ -1,3 +1,4 @@
+from itertools import chain
 from typing import List, Union
 
 import numpy as np
@@ -27,10 +28,14 @@ class UndirectedGraph(Tree):
         Get adjacent vertices by name
         """
         vertex = self.get_vertex(name)
-        get_adjacent = lambda edge: edge.get_vertices() if name in (edge.left.name, edge.right.name) else None
+        get_adjacent = (
+            lambda edge: (edge.left, edge.right) if vertex.name in [edge.left.name, edge.right.name] else None
+        )
         adjacent_vertices = np.vectorize(get_adjacent)(vertex.get_edges())
 
-        return adjacent_vertices[adjacent_vertices != name]
+        adjacent_vertices = list(set(chain(*adjacent_vertices)))
+        adjacent_vertices = [vertex for vertex in adjacent_vertices if vertex.name != name]
+        return adjacent_vertices
 
     def get_smallest_edge(self):
         """

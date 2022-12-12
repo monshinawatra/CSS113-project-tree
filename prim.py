@@ -12,10 +12,6 @@ def prim_algorithm(first_vertex:str,graph:UndirectedGraph,onlyanswer=False):
         checklist=graph.vertices2name(graph.get_adjacent_vertices(first)) #ตัวที่Aพุ่งไปหาได้ ['B', 'C'] , check what vertex A can go
         different_checklist = set(checklist)-set(check_if_it_have) #checkตัวที่ยังไม่เคยไป ['B', 'C'], check what vertex isn't go 
         check_if_it_have.append(first) #add for check what vertex have been gone
-        if ((list(different_checklist)) == [] and (len(check_if_it_have)!=len(all_vertex))):
-            checklist=graph.vertices2name((graph.get_adjacent_vertices(check_if_it_have[-2])))
-            different_checklist = set(checklist)-set(check_if_it_have)
-            first=check_if_it_have[-2]
         for adj in list(different_checklist):
             edge = graph.get_edge_to(first, adj)
             min_edge_if_have_parallel=min(edge,key=lambda x: x.weight).weight #find the minimum if there have parallel

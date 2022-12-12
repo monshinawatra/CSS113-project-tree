@@ -1,7 +1,7 @@
 import numpy as np
 from tree.graph import UndirectedGraph
 
-def prim_algorithm(first_vertex:str,graph:UndirectedGraph):
+def prim_algorithm(first_vertex:str,graph:UndirectedGraph,onlyanswer=False):
     first=first_vertex
     all_vertex=[v.name for v in graph.vertices]
     ans = {}
@@ -15,14 +15,14 @@ def prim_algorithm(first_vertex:str,graph:UndirectedGraph):
         for adj in list(different_checklist):
             edge = graph.get_edge_to(first, adj)
             min_edge_if_have_parallel=min(edge,key=lambda x: x.weight).weight #find the minimum if there have parallel
-            differ.update({first+adj:min_edge_if_have_parallel})
+            differ.update({(first,adj):min_edge_if_have_parallel})
         min_vertex = min(differ,key=differ.get) # ตัวน้อยสุดใน dictionary , find minimum in dictionary
         ans.update({min_vertex:differ[min_vertex]})
         differ.pop(min_vertex)#remove min in dictionary
         first = min_vertex[1] #the first str is change into adjectcent str
         counter += 1
 
-    return(f"answer is {ans} and total weight is {sum(ans.values())}")
+    return((f"answer is {ans} and total weight is {sum(ans.values())}") if onlyanswer == False else (list(ans.keys())))
 
 graph_array = np.array(
     [
@@ -40,3 +40,4 @@ graph_array = np.array(
 graph_ex = UndirectedGraph.from_numpy(array=graph_array, weighted_graph=True)
 
 print(prim_algorithm("A",graph_ex))
+print(prim_algorithm("A",graph_ex,onlyanswer=True))

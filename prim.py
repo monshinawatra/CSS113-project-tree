@@ -23,10 +23,18 @@ def prim_algorithm(first_vertex:str,graph:UndirectedGraph,onlyanswer=False):
         counter += 1
 
     return((f"answer is {ans} and total weight is {sum(ans.values())}") if onlyanswer == False else (list(ans.keys())))
+<<<<<<< Updated upstream
 
 graph_array = np.array(
     [
         ("A", "B", 4),
+=======
+graph_array = np.array(
+    [
+        ("A", "B", 4),
+        ("A","A",4),
+        ("A","B",5),
+>>>>>>> Stashed changes
         ("A", "C", 5),
         ("B", "C", 11),
         ("B", "D", 9),
@@ -38,6 +46,9 @@ graph_array = np.array(
     ]
 )
 graph_ex = UndirectedGraph.from_numpy(array=graph_array, weighted_graph=True)
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 print(prim_algorithm("A",graph_ex))
 print(prim_algorithm("A",graph_ex,onlyanswer=True))
